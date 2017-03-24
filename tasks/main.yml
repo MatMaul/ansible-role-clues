@@ -53,15 +53,6 @@
 - name: Installing CLUES2
   command: python setup.py install chdir=/tmp/clues-master creates=/usr/local/bin/cluesserver
 
-# CLUES2 configuration
-# /etc/hosts configuration
-- name: Configuring CLUES2
-  shell: |
-    for i in `seq 1 {{ec3_max_instances}}`; do
-      item="{{vnode_prefix}}${i}";
-      grep -q "\<${item}\>" /etc/hosts || echo "127.0.0.1 ${item}.localdomain ${item}" >> /etc/hosts;
-    done
-
 # CLUES2 Config file
 - file: path=/etc/clues2 state=directory mode=755
 
